@@ -138,7 +138,7 @@ document.getElementById('calculator').appendChild(tablerow3);
 
 
 function clearscreen() {
-    document.getElementById("result").value = "";
+    document.getElementById("result").value = "0";
 }
 
 
@@ -157,52 +157,22 @@ let pr = document.createElement('pr');
 pr.setAttribute('id', "p1");
 document.body.appendChild(pr);
 
-// function func() {
-//     let s = document.getElementById("result").value;
-//     if (s.match("A")) {
-//         btntext.addEventListener("keypress", function (event) {
-//             alert(".....")
-//         })
-//     }
-//     // alert("window");
-// }
-btntext.addEventListener("click", "func()");
-btntext.addEventListener("keypress", "func()");
-function func(e) {
-    if (e.type == 'keypress'){
-        e.preventDefault();
-        console.log(e.key);
 
-       var keynum = e.key
 
-    var letters = /[a-zA-Z]/;
+btntext.addEventListener("keypress", function (event) {
+    if (isFinite(event.key) || event.key == "+" || event.key == "-" || event.key == "/" || event.key == "*"
+        || event.key == "." || event.key == "Backspace" || event.key == "Enter") {
+        if (event.key == "Enter") {
+            calculate();
+        }
+    } else {
+        alert(" pls, remove the invalid input and Enter Valid Input");  
+        let existing_value = document.getElementById('result').value;
+        document.getElementById('result').value = existing_value.substring(0, existing_value.length - 1);
+             
+       
+        console.log(event.key)
 
-    if(keynum =="Enter"){
-        calculate(keynum)
     }
-    else if(keynum.match(letters)) {
-        alert("enter Digits For Calculation");
-    }
-}
-}
-
-// btntext.addEventListener(
-//     "keydown",
-//     (event) => {
-//         const keyName = event.key;
-
-//         if (keyName === "Control") {
-//             // do not alert when only Control key is pressed.
-//             return;
-//         }
-
-//         if (event.ctrlKey) {
-//             // Even though event.key is not 'Control' (e.g., 'a' is pressed),
-//             // event.ctrlKey may be true if Ctrl key is pressed at the same time.
-//             alert(`Combination of ctrlKey + ${keyName}`);
-//         } else {
-//             alert(`Key pressed ${keyName}`);
-//         }
-//     },
-//     false
-// );
+   
+})
